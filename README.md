@@ -472,10 +472,31 @@ interface CuimpOptions {
   path?: string // Custom path to curl-impersonate binary
   extraCurlArgs?: string[] // Global curl arguments applied to all requests
   logger?: Logger // Custom logger for binary download/verification messages
+  proxy?: string // Default proxy for all requests (HTTP, HTTPS, or SOCKS URL)
   cookieJar?: boolean | string // Enable automatic cookie management
   autoDownload?: boolean // If false, throw error instead of auto-downloading binaries (default: true)
 }
 ```
+
+### Proxy Configuration
+
+Set a default proxy for all requests when creating the client. Per-request `proxy` in `CuimpRequestConfig` overrides this.
+
+```typescript
+// Session-level proxy: all requests use this proxy by default
+const client = createCuimpHttp({
+  proxy: 'http://proxy.example.com:8080',
+})
+
+await client.get('https://api.example.com/data') // Uses the proxy
+
+// Override for a single request
+await client.get('https://api.example.com/other', {
+  proxy: 'socks5://other-proxy:1080',
+})
+```
+
+Supported proxy URL formats: `http://host:port`, `https://host:port`, `socks4://host:port`, `socks5://host:port`, or `host:port` (defaults to HTTP). Authentication: `http://user:pass@host:port`.
 
 ### Cookie Jar Configuration
 
@@ -1061,7 +1082,6 @@ Thanks to these awesome people who have contributed to this project:
     </td>
   </tr>
 </table>
-
 
 ---
 

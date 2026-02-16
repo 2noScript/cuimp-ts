@@ -311,6 +311,31 @@ describe('CuimpHttp', () => {
       )
     })
 
+    it('should use proxy from defaults when not specified in request', async () => {
+      const mockResponse = {
+        exitCode: 0,
+        stdout: Buffer.from('HTTP/1.1 200 OK\r\n\r\n{}'),
+        stderr: Buffer.from(''),
+      }
+      mockRunBinary.mockResolvedValue(mockResponse)
+
+      const clientWithProxyDefault = new CuimpHttp(mockCuimp, {
+        proxy: 'http://session-proxy.example.com:9090',
+      })
+
+      const config: CuimpRequestConfig = {
+        url: 'https://api.example.com/test',
+      }
+
+      await clientWithProxyDefault.request(config)
+
+      expect(mockRunBinary).toHaveBeenCalledWith(
+        '/usr/bin/curl-impersonate',
+        expect.arrayContaining(['--proxy', 'http://session-proxy.example.com:9090']),
+        expect.any(Object)
+      )
+    })
+
     it('should handle insecure TLS', async () => {
       const mockResponse = {
         exitCode: 0,
