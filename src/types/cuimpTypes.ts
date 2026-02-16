@@ -87,6 +87,7 @@ export interface CuimpOptions {
   path?: string
   extraCurlArgs?: string[] // Global curl arguments applied to all requests
   logger?: Logger
+  proxy?: string
   cookieJar?: CookieJarOption // Enable automatic cookie management
   autoDownload?: boolean // If false, throw error instead of auto-downloading binaries (default: true)
 }

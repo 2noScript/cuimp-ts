@@ -186,6 +186,20 @@ describe('Integration Tests - Main API', () => {
       expect(response.status).toBe(200)
       expect(mockValidateDescriptor).toHaveBeenCalledWith({ browser: 'chrome' })
     })
+
+    it('should pass proxy from options to client defaults', async () => {
+      const client = createCuimpHttp({
+        proxy: 'http://proxy.example.com:8080',
+      })
+
+      await client.get('https://api.example.com/test')
+
+      expect(mockRunBinary).toHaveBeenCalledWith(
+        expect.any(String),
+        expect.arrayContaining(['--proxy', 'http://proxy.example.com:8080']),
+        expect.any(Object)
+      )
+    })
   })
 
   describe('Convenience functions integration', () => {

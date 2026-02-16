@@ -49,6 +49,11 @@ export function createCuimpHttp(options?: CuimpOptions) {
     defaults.extraCurlArgs = options.extraCurlArgs
   }
 
+  // Pass proxy from options to defaults if provided
+  if (options?.proxy) {
+    defaults.proxy = options.proxy
+  }
+
   return new CuimpHttp(core, defaults, options?.cookieJar)
 }
 
