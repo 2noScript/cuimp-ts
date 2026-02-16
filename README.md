@@ -1055,7 +1055,6 @@ Thanks to these awesome people who have contributed to this project:
   </tr>
 </table>
 
-
 ---
 
 <div align="center">
