@@ -1052,8 +1052,16 @@ Thanks to these awesome people who have contributed to this project:
       </a><br />
       <sub>Raspberry Pi Support</sub>
     </td>
+    <td align="center">
+      <a href="https://github.com/vinikjkkj">
+        <img src="https://github.com/vinikjkkj.png" width="100px;" alt="vinikjkkj"/><br />
+        <sub><b>vinikjkkj</b></sub>
+      </a><br />
+      <sub>musl libc Detection (Linux)</sub>
+    </td>
   </tr>
 </table>
+
 
 ---
 
